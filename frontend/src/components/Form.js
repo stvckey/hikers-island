@@ -1,58 +1,14 @@
 import { useState, useEffect } from 'react'
+import park_data from '..park_info.json/'
 
 function Form() {
-  const [stateData, setStateData] = useState({ state: ''});
-  const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState('');
-
-  
-  const fetchOptions = async () => {
-    try {
-      const response = await fetch('/options.json');
-      const data = await response.json();
-      setOptions(data);
-    } catch (error) {
-      console.error('Error fetching options:', error);
-    }
-  };
-
-  const handleInputChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Selected option:', selectedOption);
-  };
-
-
-
-  const [data, setData] = useState({})
-  useEffect(()=>{
-    fetchData();
-  },[]);
-
-  const fetchData = async ()=>{
-    try{
-      const response = await fetch('http://127.0.0.1:5000/')
-      const jsonData = await response.json();
-      setData(jsonData)
-    } catch(error){
-      console.log('Error', error)
-    }
-  }
-
-  const total_states = data["total_states"]
-  console.log(total_states)
-
-  let count = 0;
-  for (let states in total_states){
-    count++
-  }
 
   const choices = []
+  count = 0 
 
   for (let i = 0; i < count; i++) {
+    }
+
     const choice = 
       <li><a 
             onClick={handleInputChange}
