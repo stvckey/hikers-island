@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  background: linear-gradient(#b7fdae,#00800b);
+  overflow: hidden;
 }
 
 code {
@@ -24,4 +27,108 @@ label {
 input {
   font-size: 18px;
   margin-left: 5px;
+}
+
+.btn{
+  background-color: white !important;
+  border-color: #004225 !important;
+  border-width: 2px !important;
+  color: #004225 !important;
+  margin: 5px;
+}
+
+.login-singup-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 30px;
+  margin-top: 200px;
+  background: #fff;
+  padding-bottom: 30px;
+  width: 600px;
+}
+
+.login-singup-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+
+  color: #068a06;
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.underline {
+  width: 5vw;
+  height: 6px;
+  background: #068a06;
+  border-radius: 9px;
+}
+
+.login-singup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top:30px;
+}
+
+.inputs {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 480px;
+  height: 80px;
+  background: #eaeaea;
+  border-radius: 6px;
+}
+
+.input img {
+  margin: 0px 30px;
+}
+
+.input input {
+  height: 50px;
+  width: 400px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #797979;
+  font-size: 19px;
+}
+
+.login-signup-buttons {
+  width: 100%;
+}
+
+.nav-header {
+  z-index: 5;
+  background-color: #004225;
+  color: white;
+  padding: .5em;
+  position: sticky;
+  top: 0;
+  display: flex;
+}
+
+.nav-logo{
+  padding-right: 5em;
+}
+
+.filters{
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  background-color: #FFB000;
+  z-index: 5;
+  position: sticky;
 }

@@ -1,4 +1,9 @@
 import React , {useState, useEffect} from 'react'
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import httpClient from '../httpClient';
 import { User } from "../types";
 
@@ -21,10 +26,15 @@ const LandingPage: React.FC = () => {
         })();
     }, []);
     return (
-        <div>
-            <h1>Welcome to the app mane!</h1>
+        <div className='login-singup-container  rounded-3'>
+            
+            <h1 className='login-singup-header'>
+                HikeU
+                <div className='underline'></div>
+            </h1>
+
             {user != null ? (
-                <div>
+                <div className='login-singup'>
                     <h1>You're logged in {user.username}</h1>
 
                     
@@ -33,14 +43,14 @@ const LandingPage: React.FC = () => {
                 </div>
             ) : (
 
-                <div>
+                <div className='login-singup'>
                     <h3>You are NOT logged in</h3>
                     <div>
                         <a href='/login'>
-                            <button>Log in</button>
+                            <button className='btn btn-md rounded-pill'>Log in</button>
                         </a>
-                        <a href='/register'>
-                            <button>Register</button>
+                        <a href='/signup'>
+                            <button className='btn btn-md rounded-pill'>Register</button>
                         </a>
                     </div>
                 </div>)}

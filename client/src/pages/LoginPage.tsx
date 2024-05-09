@@ -1,6 +1,12 @@
 import React, {useState} from 'react'
 import httpClient from '../httpClient';
 
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState<string>("");
@@ -25,31 +31,36 @@ const LoginPage: React.FC = () => {
     
 
     return (
-        <div>
+        <div className='login-singup-container rounded-3'>
             <h1>Login Brother</h1>
-            <form>
+            <form className='inputs'>
 
-                <div>
-                    <label>Email: </label>
+                <div className='input'>
+                    <img src={require('../Components/Assets/email.png')}></img>
+                    
                     <input 
+                    placeholder='Email'
                     type='text' 
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)} id=""
                     />
                 </div>
 
-                <div>
-                    <label>Password: </label>
+                <div className='input'>
+                    <img src={require('../Components/Assets/password.png')}></img>
+                    
                     <input 
+                    placeholder='password'
                     type='password' 
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} id=""
                     />
                 </div>
 
-                <button type="button" onClick={() => logInUser()}>
-                    Submit
-                </button>
+                    <button className='btn btn-md rounded-pill' type="button" onClick={() => logInUser()}>
+                        Submit
+                    </button>
+
                 
             </form>
         </div>
