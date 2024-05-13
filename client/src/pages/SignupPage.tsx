@@ -24,7 +24,6 @@ const SignupPage: React.FC = () => {
             });
 
             // Assuming the response indicates success
-            window.location.href = "/";
         } catch (error: any) {
             if (error.response && error.response.status === 401) {
                 // Alert the user for invalid credentials
