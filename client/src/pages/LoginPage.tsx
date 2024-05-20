@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
             password,
         });
         
-        window.location.href = "/";
+        window.location.href = "/Home";
         } catch (error: any) {
             if (error.response.status === 401) {
                 alert("Invalid credentials homie");
