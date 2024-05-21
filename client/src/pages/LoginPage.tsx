@@ -61,6 +61,10 @@ const LoginPage: React.FC = () => {
                         Submit
                     </button>
 
+                    <a href="/SignUp" className='btn btn-md rounded-pill'>
+                            Don't have an account?
+                    </a>
+
                 
             </form>
         </div>

@@ -24,6 +24,7 @@ const SignupPage: React.FC = () => {
             });
 
             // Assuming the response indicates success
+            window.location.href = "/";
         } catch (error: any) {
             if (error.response && error.response.status === 401) {
                 // Alert the user for invalid credentials
@@ -80,6 +81,10 @@ const SignupPage: React.FC = () => {
                     <button className='btn btn-md rounded-pill' type="button" onClick={() => signupUser()}>
                         Submit
                     </button>
+
+                    <a href="/login" className='btn btn-md rounded-pill'>
+                            Already have an account?
+                    </a>
 
                 
             </form>

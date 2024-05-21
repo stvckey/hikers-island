@@ -4,14 +4,14 @@ import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import Home from "./pages/Home";
-import NewLandingPage from "./pages/NewLandingPage";
+import LandingPage from "./pages/LandingPage";
 
 const Router = () => {
     return (
         <div>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<NewLandingPage />} />
+                    <Route path="/" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/home" element={<Home />} />

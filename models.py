@@ -37,7 +37,7 @@ class Park(db.Model):
     name = db.Column(db.String(255))
     designation = db.Column(db.String(255))
     relevanceScore = db.Column(db.Float(2))
-    phoneNumber = db.Column(db.VARCHAR(20))
+    phoneNumber = db.Column(db.String(15))
     address = db.Column(db.Text)
     
 
