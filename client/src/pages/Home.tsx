@@ -2,13 +2,17 @@ import React from 'react'
 import NavBar from '../Components/NavBar'
 import Filters from '../Components/Filters'
 import Map from '../Components/Map'
+import StateList from '../Components/StateList'
 
 const Home = () => {
   return (
     <div>
         <NavBar />
         <Filters />
-        <Map />
+        <div className='content'>
+          <StateList />
+          <Map />
+        </div>
     </div>
 
   )

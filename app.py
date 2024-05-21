@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, current_app, request, jsonify, session
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS, cross_origin
 from flask_session import Session
@@ -99,11 +99,78 @@ def login_user():
         "username": user.username
     })
     
+@app.route("/all_users")
+def get_all_users():
+
+    users = User.query.all()
+    return jsonify([{
+        "username": user.username
+    } for user in users])
+    
+    
 @app.route("/logout", methods=["POST"])
 def logout_user():
     session.pop("user_id")
     return "200"
-    
+
+@app.route("/all_parks")
+def get_all_parks():
+
+    parks = Park.query.all()
+    return jsonify([{
+        
+        "park_id": park.park_id,
+        "name": park.name,
+        "designation": park.designation,
+        "parkCode": park.parkCode,
+        "url": park.url,
+        "description": park.description,
+        "lat": park.lat,
+        "long": park.long,
+        "activities": park.activities,
+        "topics": park.topics,
+        "states": park.states,
+        "entranceFees": park.entranceFees,
+        "directionsInfo": park.directionsInfo,
+        "directionsUrl": park.directionsUrl,
+        "weatherInfo": park.weatherInfo,
+        "relevanceScore": park.relevanceScore,
+        "phoneNumber": park.phoneNumber,
+        "address": park.address
+        
+    } for park in parks])    
+
+#Database population route
+
+def add_parks():
+    with open('park_data.json', 'r') as json_file:
+        park_data = json.load(json_file)
+
+    with current_app.app_context():
+        for x in park_data:
+            # Check if lat and long are valid numbers
+            if x["lat"] is not None and x["long"] is not None:
+                new_park = Park(
+                    lat=x["lat"], long=x["long"], url=x["url"],
+                    activities=str(x["activities"]), description=x["description"],states=x["states"], 
+                    parkCode=x["parkCode"], topics=str(x["topics"]), directionsInfo=x["directionsInfo"],
+                    directionsUrl=x["directionsUrl"], weatherInfo=x["weatherInfo"], designation=x["designation"],
+                    relevanceScore=x["relevanceScore"], entranceFees=x["entranceFees"], name=x["name"],
+                    address=x["address"], phoneNumber=str(x["phoneNumber"])
+                )
+                db.session.add(new_park)
+            else:
+                print(f"Ignoring park with missing latitude/longitude data: {x['name']}")
+
+        db.session.commit()
+
+
+@app.route("/initialize_database", methods=["GET"])
+def initialize_database():
+    add_parks()
+    return "Database initialized successfully!"
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
