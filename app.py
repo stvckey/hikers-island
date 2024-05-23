@@ -20,6 +20,9 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
     
+
+# current_state = "GA"
+    
 @app.route('/')
 def index():
     apiKey = os.getenv('GOOGLE_MAPS_API_KEY')
@@ -138,7 +141,55 @@ def get_all_parks():
         "phoneNumber": park.phoneNumber,
         "address": park.address
         
-    } for park in parks])    
+    } for park in parks])
+
+#Getting all park states
+@app.route("/all_states")
+def get_all_states():
+    parks = Park.query.all()
+    
+    # Using a set to collect unique states
+    unique_states = set()
+    for park in parks:
+        park_states = park.states.split(",")  # Assuming states are comma-separated
+        for state in park_states:
+            unique_states.add(state.strip())  # Strip any leading/trailing whitespace
+    
+    return jsonify(list(unique_states))
+
+
+@app.route("/search_by_state", methods=["GET", "POST"])
+def search_by_state():
+    # global current_state
+    
+    current_state = request.json["state"]
+
+    parks = Park.query.filter_by(states=current_state)
+    return jsonify([{
+        
+        "park_id": park.park_id,
+        "name": park.name,
+        "designation": park.designation,
+        "parkCode": park.parkCode,
+        "url": park.url,
+        "description": park.description,
+        "lat": park.lat,
+        "long": park.long,
+        "activities": park.activities,
+        "topics": park.topics,
+        "states": park.states,
+        "entranceFees": park.entranceFees,
+        "directionsInfo": park.directionsInfo,
+        "directionsUrl": park.directionsUrl,
+        "weatherInfo": park.weatherInfo,
+        "relevanceScore": park.relevanceScore,
+        "phoneNumber": park.phoneNumber,
+        "address": park.address
+        
+    } for park in parks])
+
+
+
 
 #Database population route
 
@@ -152,7 +203,7 @@ def add_parks():
             if x["lat"] is not None and x["long"] is not None:
                 new_park = Park(
                     lat=x["lat"], long=x["long"], url=x["url"],
-                    activities=str(x["activities"]), description=x["description"],states=x["states"], 
+                    activities=str(x["activities"]), description=x["description"],states=x["states"][:2], 
                     parkCode=x["parkCode"], topics=str(x["topics"]), directionsInfo=x["directionsInfo"],
                     directionsUrl=x["directionsUrl"], weatherInfo=x["weatherInfo"], designation=x["designation"],
                     relevanceScore=x["relevanceScore"], entranceFees=x["entranceFees"], name=x["name"],

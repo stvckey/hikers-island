@@ -150,4 +150,10 @@ input {
 
 .states-list {
   grid-area: 1 / 1 / 2 / 2;
+  min-width: 400px;
+}
+
+.scrollable-dropdown {
+  max-height: 200px; /* Adjust this value to set the max height */
+  overflow-y: auto;
 }

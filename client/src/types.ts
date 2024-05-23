@@ -31,3 +31,12 @@ export interface Comment {
     user_id: number,
     park_id: number
 }
+
+export interface FiltersProps {
+    states: string[];
+    onStateSelect: (selectedState: string) => void;
+}
+
+export interface SelectedStateProp {
+    selectedState: string;
+}
