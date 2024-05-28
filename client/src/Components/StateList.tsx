@@ -4,23 +4,24 @@ import StateCard from './StateCard'; // Import StateCard component
 import { Park } from '../types'; // Import Park interface
 
 interface StateListProps {
-  selectedState: string;
+  selectedState?: string;
+  onParkClick: (index: number) => void; // Callback to handle park clicks
 }
 
-const StateList: React.FC<StateListProps> = ({ selectedState }) => {
-  const [parks, setParks] = useState<Park[]>([]); // Use Park[] type for parks state
+const StateList: React.FC<StateListProps> = ({ selectedState, onParkClick }) => {
+  const [parks, setParks] = useState<Park[]>([]);
 
   useEffect(() => {
     const fetchParksByState = async () => {
-      try {
-        if (selectedState) {
+      if (selectedState) {
+        try {
           const response = await axios.post("http://localhost:5000/search_by_state", {
             state: selectedState,
           });
           setParks(response.data);
+        } catch (error) {
+          console.error('Error fetching parks:', error);
         }
-      } catch (error) {
-        console.error('Error fetching parks:', error);
       }
     };
 
@@ -29,18 +30,12 @@ const StateList: React.FC<StateListProps> = ({ selectedState }) => {
 
   return (
     <div>
-      {selectedState ? (
-        <div>
-          <h2>Parks in {selectedState}</h2>
-          <div className="park-cards">
-            {parks.map(park => (
-              <StateCard key={park.park_id} park={park} />
-            ))}
-          </div>
-        </div>
-      ) : (
-        <p>Please select a state to view the parks.</p>
-      )}
+      <h2>Parks in {selectedState}</h2>
+      <div className="park-cards">
+        {parks.map((park, index) => (
+          <StateCard key={park.park_id} park={park} onClick={() => onParkClick(index)} />
+        ))}
+      </div>
     </div>
   );
 }
